@@ -207,21 +207,43 @@ export default function HairAnalysisPage() {
                         })()}
                       </div>
                       
-                      {/* Confidence Score */}
-                      {analysis.details?.confidence_score && (
-                        <div className="text-center">
-                          <p className="text-ashram-text-secondary text-sm malayalam-text">വിശ്വാസ്യത (Confidence)</p>
-                          <p className="text-ashram-accent text-xl font-mono">
-                            {Math.round((analysis.details.confidence_score || 0) * 100)}%
-                          </p>
-                          <p className="text-ashram-text-secondary text-xs mt-1">
-                            {getConfidenceComment(analysis.details.confidence_score || 0).malayalam}
-                          </p>
-                        </div>
-                      )}
-                    </div>
-                  </motion.div>
-                )}
+                                             {/* Confidence Score */}
+                        {analysis.details?.confidence_score && (
+                          <div className="text-center">
+                            <p className="text-ashram-text-secondary text-sm malayalam-text">വിശ്വാസ്യത (Confidence)</p>
+                            <p className="text-ashram-accent text-xl font-mono">
+                              {Math.round((analysis.details.confidence_score || 0) * 100)}%
+                            </p>
+                            <p className="text-ashram-text-secondary text-xs mt-1">
+                              {getConfidenceComment(analysis.details.confidence_score || 0).malayalam}
+                            </p>
+                          </div>
+                        )}
+
+                        {/* Scientific Dashboard */}
+                        {(analysis.details as any)?.follicular_alignment_index && (
+                          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div className="p-4 rounded-lg border border-ashram-accent bg-ashram-background bg-opacity-30">
+                              <p className="text-ashram-text-secondary text-sm">Follicular Alignment Index</p>
+                              <p className="text-ashram-accent text-2xl font-mono">{(analysis.details as any).follicular_alignment_index}</p>
+                            </div>
+                            <div className="p-4 rounded-lg border border-ashram-accent bg-ashram-background bg-opacity-30">
+                              <p className="text-ashram-text-secondary text-sm">Chromatic Vibrancy Score</p>
+                              <p className="text-ashram-accent text-2xl font-mono">{(analysis.details as any).chromatic_vibrancy_score}</p>
+                            </div>
+                            <div className="p-4 rounded-lg border border-ashram-accent bg-ashram-background bg-opacity-30">
+                              <p className="text-ashram-text-secondary text-sm">Keratin Integrity Factor</p>
+                              <p className="text-ashram-accent text-2xl font-mono">{(analysis.details as any).keratin_integrity_factor}</p>
+                            </div>
+                            <div className="p-4 rounded-lg border border-ashram-accent bg-ashram-background bg-opacity-30">
+                              <p className="text-ashram-text-secondary text-sm">Mudi Mantra</p>
+                              <p className="text-ashram-saffron text-lg">{(analysis.details as any).mudi_mantra}</p>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </motion.div>
+                  )}
 
                 {/* Spiritual Prophecy */}
                 {prophecy && (
