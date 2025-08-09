@@ -65,6 +65,20 @@ class HairAnalyzerV2:
             "mudi_mantra": mudi_mantra
         }
 
+    def _calculate_singularity_event(self, estimated_hairs: int) -> Dict[str, Any]:
+        """Calculates the date of the user's eventual 'Scalp Singularity'."""
+        density_percentage = (estimated_hairs / self.average_hairs) * 100
+
+        # Invent a 'follicular decay rate' based on how much hair is 'missing'.
+        # The more hair loss, the faster the 'decay'.
+        if density_percentage >= 99:
+            return {"years_to_singularity": float('inf')}  # Essentially never
+
+        decay_rate_per_year = (100.1 - density_percentage) / 500.0
+        years_to_singularity = density_percentage / decay_rate_per_year
+
+        return {"years_to_singularity": round(years_to_singularity, 2)}
+
     def run_analysis(self, images: List[np.ndarray]) -> Dict[str, Any]:
         start_time = time.time()
         class_predictions = {0: 0, 1: 0, 2: 0, 3: 0}  # Counts for each density class
@@ -90,9 +104,13 @@ class HairAnalyzerV2:
         # Generate all our useless metrics from the first image
         useless_metrics = self._calculate_useless_metrics(images[0])
 
+        # Calculate the singularity event
+        singularity_metrics = self._calculate_singularity_event(estimated_hairs)
+
         final_results = {
             "estimated_hair_count": min(estimated_hairs, 150000),  # Cap at a reasonable max
             **useless_metrics,
+            **singularity_metrics,
             "analysis_time": f"{time.time() - start_time:.2f}s",
         }
         return final_results

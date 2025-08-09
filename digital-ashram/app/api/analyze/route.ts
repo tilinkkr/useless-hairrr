@@ -116,7 +116,8 @@ export async function POST(req: Request) {
                 follicular_alignment_index: analysis_results.follicular_alignment_index,
                 chromatic_vibrancy_score: analysis_results.chromatic_vibrancy_score,
                 keratin_integrity_factor: analysis_results.keratin_integrity_factor,
-                mudi_mantra: analysis_results.mudi_mantra
+                mudi_mantra: analysis_results.mudi_mantra,
+                years_to_singularity: analysis_results.years_to_singularity
               }
             });
     } catch (analysis_error) {

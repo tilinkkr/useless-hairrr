@@ -3,7 +3,9 @@
 import dynamic from "next/dynamic";
 import { useAppStore } from "../store";
 import { AnimatePresence, motion } from "framer-motion";
-import HairCounter from "../components/HairCounter";
+ import HairCounter from "../components/HairCounter";
+ import SingularityCountdown from "../components/SingularityCountdown";
+ import HairSonificationPlayer from "../components/HairSonificationPlayer";
 import IntroVideo from "../components/IntroVideo";
 import UploaderWithAction from "../components/UploaderWithAction";
 import { getDivineProphecy, getAnalysisComment, getConfidenceComment } from "../utils/prophecy";
@@ -193,19 +195,30 @@ export default function HairAnalysisPage() {
                         </p>
                       </div>
                       
-                      {/* Divine Prophecy */}
-                      <div className="text-center bg-ashram-background bg-opacity-20 p-4 rounded-md">
-                        {(() => {
-                          const hairCount = Number(formatCount(analysis.count).replace(/,/g, ''));
-                          const prophecy = getDivineProphecy(hairCount);
-                          return (
-                            <>
-                              <p className="text-ashram-saffron text-lg malayalam-text">{prophecy.malayalam}</p>
-                              <p className="text-ashram-text-secondary text-xs mt-1">{prophecy.english}</p>
-                            </>
-                          );
-                        })()}
-                      </div>
+                                             {/* Divine Prophecy */}
+                        <div className="text-center bg-ashram-background bg-opacity-20 p-4 rounded-md">
+                          {(() => {
+                            const hairCount = Number(formatCount(analysis.count).replace(/,/g, ''));
+                            const prophecy = getDivineProphecy(hairCount);
+                            return (
+                              <>
+                                <p className="text-ashram-saffron text-lg malayalam-text">{prophecy.malayalam}</p>
+                                <p className="text-ashram-text-secondary text-xs mt-1">{prophecy.english}</p>
+                              </>
+                            );
+                          })()}
+                        </div>
+
+                        {/* Hair Sonification Player */}
+                        <HairSonificationPlayer 
+                          count={Number(formatCount(analysis.count).replace(/,/g, ''))}
+                          vibrancy={(analysis.details as any)?.chromatic_vibrancy_score || '0%'}
+                        />
+
+                        {/* Singularity Countdown */}
+                        {(analysis.details as any)?.years_to_singularity !== undefined && (
+                          <SingularityCountdown years={(analysis.details as any)?.years_to_singularity} />
+                        )}
                       
                                              {/* Confidence Score */}
                         {analysis.details?.confidence_score && (
