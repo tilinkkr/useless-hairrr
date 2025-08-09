@@ -1,0 +1,134 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+  
+  /* Ashram Color Palette */
+  --ashram-background: #121212;
+  --ashram-text-primary: #E0E0E0;
+  --ashram-text-secondary: #A0A0A0;
+  --ashram-saffron: #FFC300;
+  --ashram-accent: #00BCD4;
+  --ashram-error: #CF6679;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Custom scrollbar for webkit browsers */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ashram-background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ashram-text-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ashram-accent);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(45deg, var(--ashram-saffron), #f59e0b, #d97706);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Ashram Color Classes */
+.bg-ashram-background {
+  background-color: var(--ashram-background);
+}
+
+.text-ashram-text-primary {
+  color: var(--ashram-text-primary);
+}
+
+.text-ashram-text-secondary {
+  color: var(--ashram-text-secondary);
+}
+
+.text-ashram-saffron {
+  color: var(--ashram-saffron);
+}
+
+.text-ashram-accent {
+  color: var(--ashram-accent);
+}
+
+.text-ashram-error {
+  color: var(--ashram-error);
+}
+
+.bg-ashram-accent {
+  background-color: var(--ashram-accent);
+}
+
+.bg-ashram-saffron {
+  background-color: var(--ashram-saffron);
+}
+
+.border-ashram-accent {
+  border-color: var(--ashram-accent);
+}
+
+.border-ashram-saffron {
+  border-color: var(--ashram-saffron);
+}
+
+/* High contrast text shadows for better readability */
+.text-shadow-high-contrast {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+/* Malayalam text optimization */
+.malayalam-text {
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  line-height: 1.6;
+}
