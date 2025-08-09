@@ -98,23 +98,27 @@ export async function POST(req: Request) {
       });
     }
 
-    try {
-      const analysis_results = await runPythonAnalysis(buffers);
-      
-      return NextResponse.json({
-        count: analysis_results.total_hairs ?? 0,
-        status: "Advanced Analysis Complete",
-        analysis_type: "sophisticated_analysis",
-        confidence: analysis_results.confidence,
-        view_contributions: analysis_results.view_contributions,
-        heatmaps: analysis_results.heatmaps,
-        details: {
-          total_hairs: analysis_results.total_hairs ?? 0,
-          confidence_score: analysis_results.confidence ?? 0,
-          analysis_time: analysis_results.analysis_time ?? "N/A",
-          view_breakdown: analysis_results.view_contributions ?? []
-        }
-      });
+          try {
+            const analysis_results = await runPythonAnalysis(buffers);
+            
+            return NextResponse.json({
+              count: analysis_results.total_hairs ?? 0,
+              status: "Advanced Analysis Complete",
+              analysis_type: "sophisticated_analysis",
+              confidence: analysis_results.confidence,
+              view_contributions: analysis_results.view_contributions,
+              heatmaps: analysis_results.heatmaps,
+              details: {
+                total_hairs: analysis_results.total_hairs ?? 0,
+                confidence_score: analysis_results.confidence ?? 0,
+                analysis_time: analysis_results.analysis_time ?? "N/A",
+                view_breakdown: analysis_results.view_contributions ?? [],
+                follicular_alignment_index: analysis_results.follicular_alignment_index,
+                chromatic_vibrancy_score: analysis_results.chromatic_vibrancy_score,
+                keratin_integrity_factor: analysis_results.keratin_integrity_factor,
+                mudi_mantra: analysis_results.mudi_mantra
+              }
+            });
     } catch (analysis_error) {
       console.error("Sophisticated analysis failed, falling back to basic:", analysis_error);
       
